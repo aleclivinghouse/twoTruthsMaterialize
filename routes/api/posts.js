@@ -101,6 +101,8 @@ router.post(
   '/like/:id',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
+    console.log('this is the reponse going to the backend');
+    console.log(req.params);
     Profile.findOne({ user: req.user.id }).then(profile => {
       Post.findById(req.params.id)
         .then(post => {

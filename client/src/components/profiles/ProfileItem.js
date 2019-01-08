@@ -12,7 +12,9 @@ class ProfileItem extends Component {
           <div className="col-lg-6 col-md-4 col-8">
               <h3>{profile.user.name}</h3>
               <p>{profile.bio}</p>
-              <p>{profile.handle}</p>
+             <Link to={`/profile/${profile.handle}`} className="btn btn-info">
+               Profile
+             </Link>
           </div>
         </div>
         <div className="cold-md-4 d-none d-md-block">

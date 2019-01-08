@@ -37,7 +37,6 @@ class Profiles extends Component {
               </p>
               {profileItems}
             </div>
-            <Link to='/profile/:handle'>Go to Handle</Link>
           </div>
         </div>
       </div>
