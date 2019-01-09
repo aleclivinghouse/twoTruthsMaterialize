@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
 import { Link } from 'react-router-dom';
-import { deletePost, addLike, removeLike } from '../../actions/postActions';
+import { deletePost, addLike } from '../../actions/postActions';
 
 class PostItem extends Component {
   onDeleteClick(id) {
@@ -57,13 +57,6 @@ class PostItem extends Component {
                   />
                   <span className="badge badge-light">{post.likes.length}</span>
                 </button>
-                <button
-                  onClick={this.onUnlikeClick.bind(this, post._id)}
-                  type="button"
-                  className="btn btn-light mr-1"
-                >
-                  <i className="text-secondary fas fa-thumbs-down" />
-                </button>
                 <Link to={`/post/${post._id}`} className="btn btn-info mr-1">
                 View Quiz
                 </Link>
@@ -93,6 +86,6 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps, { deletePost, addLike, removeLike })(
+export default connect(mapStateToProps, { deletePost, addLike })(
   PostItem
 );

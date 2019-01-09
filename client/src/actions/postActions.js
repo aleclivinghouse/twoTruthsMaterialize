@@ -6,7 +6,8 @@ import {
   GET_POSTS,
   GET_POST,
   POST_LOADING,
-  DELETE_POST
+  DELETE_POST,
+  CLEAR_ERRORS
 } from './types';
 
 export const addPost = postData => dispatch => {
@@ -27,8 +28,9 @@ export const addPost = postData => dispatch => {
 }
 
 export const addComment = (postId, commentData) => dispatch => {
+  dispatch(clearErrors());
   axios
-    .post(`/api/comment/${postId}`, commentData)
+    .post(`/api/posts/comment/${postId}`, commentData)
     .then(res =>
       dispatch({
         type: GET_POST,
@@ -41,7 +43,7 @@ export const addComment = (postId, commentData) => dispatch => {
         payload: err.response.data
       })
     );
-  }
+};
 
   export const deleteComment = (postId, commentId) => dispatch => {
     axios
@@ -60,9 +62,26 @@ export const addComment = (postId, commentData) => dispatch => {
       );
     }
 
+// export const deletePost = id => dispatch => {
+//   axios
+//     .delete('/api/posts/${id}')
+//     .then(res =>
+//       dispatch({
+//         type: DELETE_POST,
+//         payload: id
+//       })
+//     )
+//     .catch(err =>
+//       dispatch({
+//         type: GET_ERRORS,
+//         payload: err.response.data
+//       })
+//     );
+// }
+
 export const deletePost = id => dispatch => {
   axios
-    .delete('/api/posts/${id}')
+    .delete(`/api/posts/${id}`)
     .then(res =>
       dispatch({
         type: DELETE_POST,
@@ -75,23 +94,10 @@ export const deletePost = id => dispatch => {
         payload: err.response.data
       })
     );
-}
-
+};
 export const removeLike = id => dispatch => {
   axios
     .post(`/api/posts/unlike/${id}`)
-    .then(res => dispatch(getPosts()))
-    .catch(err =>
-      dispatch({
-        type: GET_ERRORS,
-        payload: err.response.data
-      })
-    );
-}
-
-export const addLike = id => dispatch => {
-  axios
-    .post(`/api/posts/like/${id}`)
     .then(res => dispatch(getPosts()))
     .catch(err =>
       dispatch({
@@ -120,6 +126,19 @@ export const getPosts = () => dispatch => {
     );
 };
 
+export const addLike = id => dispatch => {
+  axios
+    .post(`/api/posts/like/${id}`)
+    .then(res => dispatch(getPosts()))
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+}
+
+
 
 export const getPost = id => dispatch => {
   dispatch(setPostLoading());
@@ -145,3 +164,9 @@ export const setPostLoading = () =>{
     type: POST_LOADING
   }
 }
+
+export const clearErrors = () => {
+  return {
+    type: CLEAR_ERRORS
+  };
+};

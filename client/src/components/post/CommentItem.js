@@ -1,6 +1,11 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-export default class CommentItem extends Component{
+import {deleteComment} from '../../actions/postActions';
+class CommentItem extends Component{
+
+  onDeleteClick(postId, commentId){
+    this.props.deleteComment(postId, commentId);
+  }
   render(){
     const {comment, postId, auth} = this.props;
     return(
