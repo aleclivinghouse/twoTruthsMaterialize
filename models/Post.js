@@ -9,14 +9,35 @@ const PostSchema = new Schema({
   },
   text: {
     type: String,
-    required: true
   },
   name: {
-    type: String
+    type: String,
   },
-  avatar: {
-    type: String
+  q1: {
+    type: String,
+    required: true
   },
+  a1: {
+    type: String,
+    required: true
+  },
+  q2: {
+    type: String,
+    required: true
+  },
+  a2: {
+    type: String,
+    required: true
+  },
+  q3: {
+    type: String,
+    required: true
+  },
+  a3: {
+    type: String,
+    required: true
+  },
+
   likes: [
     {
       user: {

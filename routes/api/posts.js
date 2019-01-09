@@ -52,19 +52,24 @@ router.post(
   (req, res) => {
     const { errors, isValid } = validatePostInput(req.body);
 
-    // Check Validation
-    if (!isValid) {
-      // If any errors, send 400 with errors object
-      return res.status(400).json(errors);
-    }
-
+    // // Check Validation
+    // if (!isValid) {
+    //   // If any errors, send 400 with errors object
+    //   return res.status(400).json(errors);
+    // }
+    console.log('below is the body');
+    console.log(req.body);
     const newPost = new Post({
-      text: req.body.text,
-      name: req.body.name,
-      avatar: req.body.avatar,
+      q1: req.body.q1,
+      a1: req.body.a1,
+      q2: req.body.q2,
+      a2: req.body.a2,
+      q3: req.body.q3,
+      a3: req.body.a3,
       user: req.user.id
     });
-
+    console.log('below is new post');
+    console.log(newPost);
     newPost.save().then(post => res.json(post));
   }
 );
