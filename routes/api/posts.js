@@ -68,7 +68,7 @@ router.post(
       a3: req.body.a3,
       user: req.user.id
     });
-    console.log('below is new post');
+    console.log('below is new two truths and lie');
     console.log(newPost);
     newPost.save().then(post => res.json(post));
   }
@@ -102,12 +102,37 @@ router.delete(
 // @route   POST api/posts/like/:id
 // @desc    Like post
 // @access  Private
+// router.post(
+//   '/like/:id',
+//   passport.authenticate('jwt', { session: false }),
+//   (req, res) => {
+//     console.log('this is the reponse going to the backend');
+//     console.log(req.params);
+//     Profile.findOne({ user: req.user.id }).then(profile => {
+//       Post.findById(req.params.id)
+//         .then(post => {
+//           if (
+//             post.likes.filter(like => like.user.toString() === req.user.id)
+//               .length > 0
+//           ) {
+//             post.likes = post.likes.filter(like => like.user.toString() !== req.user.id);
+//             post.save().then(post => res.json(post));
+//
+//           } else {
+//             post.likes.unshift({ user: req.user.id });
+//             post.save().then(post => res.json(post));
+//           }
+//           // Add user id to likes array
+//         })
+//         .catch(err => res.status(404).json({ postnotfound: 'No post found' }));
+//     });
+//   }
+// );
+
 router.post(
   '/like/:id',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
-    console.log('this is the reponse going to the backend');
-    console.log(req.params);
     Profile.findOne({ user: req.user.id }).then(profile => {
       Post.findById(req.params.id)
         .then(post => {
@@ -115,22 +140,21 @@ router.post(
             post.likes.filter(like => like.user.toString() === req.user.id)
               .length > 0
           ) {
-            post.likes = post.likes.filter(like => like.user.toString() !== req.user.id);
-            console.log('this is the post that will unlike')
-            console.log(post);
-            post.save().then(post => res.json(post));
-          } else {
-            console.log('this is the post that will like')
-            console.log(post);
-            post.likes.unshift({ user: req.user.id });
-            post.save().then(post => res.json(post));
+            return res
+              .status(400)
+              .json({ alreadyliked: 'User already liked this post' });
           }
+
           // Add user id to likes array
+          post.likes.unshift({ user: req.user.id });
+
+          post.save().then(post => res.json(post));
         })
         .catch(err => res.status(404).json({ postnotfound: 'No post found' }));
     });
   }
 );
+
 
 // @route   POST api/posts/unlike/:id
 // @desc    Unlike post

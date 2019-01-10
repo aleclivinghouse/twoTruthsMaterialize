@@ -43,7 +43,12 @@ class PostForm extends Component {
       a3: this.state.a3,
       name: user.name
     };
-
+    for(let item in newPost){
+      if(newPost[item] === ''){
+        newPost[item] = 'Truth'
+      }
+    }
+    console.log(newPost)
     this.props.addPost(newPost);
     this.setState({ text: '' });
   }
