@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import {Link} from 'react-router-dom';
 import ProfileItem from './ProfileItem';
 import { getProfiles } from '../../actions/profileActions';
+import {getPostsFromUser} from '../../actions/postActions';
 
 class Profiles extends Component {
   componentDidMount() {
