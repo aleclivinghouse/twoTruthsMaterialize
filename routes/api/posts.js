@@ -26,6 +26,13 @@ router.get('/', (req, res) => {
     .catch(err => res.status(404).json({ nopostsfound: 'No posts found' }));
 });
 
+router.get('/user/:id', (req, res) => {
+  Post.find({ user: req.params.id })
+    .sort({ date: -1 })
+    .then(posts => res.json(posts))
+    .catch(err => res.status(404).json({ nopostsfound: 'No posts found' }));
+});
+
 // @route   GET api/posts/:id
 // @desc    Get post by id
 // @access  Public
