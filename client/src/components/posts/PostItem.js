@@ -40,6 +40,10 @@ class PostItem extends Component {
             <p className="text-center">{post.name}</p>
               <p className="text-center">{post.q1}</p>
               <p className="text-center">{post.a1}</p>
+                <p className="text-center">{post.q2}</p>
+                <p className="text-center">{post.a2}</p>
+                  <p className="text-center">{post.q3}</p>
+                  <p className="text-center">{post.a3}</p>
           </div>
           <div className="col-md-10">
             <p className="lead">{post.text}</p>
