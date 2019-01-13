@@ -218,7 +218,8 @@ router.post(
       .then(post => {
         const newComment = {
           text: req.body.text,
-          name: req.body.name
+          name: req.body.name,
+          user: req.user.id
         };
 
         // Add to comments array
