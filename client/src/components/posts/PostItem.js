@@ -4,14 +4,21 @@ import { connect } from 'react-redux';
 import classnames from 'classnames';
 import { Link } from 'react-router-dom';
 import { deletePost, addLike } from '../../actions/postActions';
+import Modal from 'react-modal';
 
 class PostItem extends Component {
   constructor(props){
     super(props);
-
+    this.state = {
+     message: '',
+     modalIsOpen: false
+    }
+    this.closeModal = this.closeModal.bind(this);
+    this.openModal = this.openModal.bind(this);
     this.onGuessOne = this.onGuessOne.bind(this);
     this.onGuessTwo = this.onGuessTwo.bind(this);
     this.onGuessThree = this.onGuessThree.bind(this);
+    // this.afterOpenModal = this.afterOpenModal.bind(this)
   }
   onDeleteClick(id) {
     this.props.deletePost(id);
@@ -34,27 +41,42 @@ class PostItem extends Component {
     }
   }
 
+  openModal() {
+  this.setState({modalIsOpen: true});
+}
+
+// afterOpenModal() {
+//   // references are now sync'd and can be accessed.
+//   this.subtitle.style.color = '#f00';
+// }
+
+closeModal() {
+  this.setState({modalIsOpen: false});
+}
+
   onGuessOne(){
-    console.log('guess one fired');
-    if(this.props.post.a1 === true){
-      alert('You guessed right');
+    this.setState({modalIsOpen: true});
+    if(this.props.post.a1 === 'Truth'){
+      this.state.message = 'You guessed wrong';
     } else {
-      alert('You guessed wrong');
+      this.state.message ='You guessed right';
     }
   }
 
   onGuessTwo(){
-    if(this.props.post.a2 === true){
-      alert('You guessed right');
+     this.setState({modalIsOpen: true});
+    if(this.props.post.a2 === 'Truth'){
+      this.state.message = 'You guessed wrong';
     }else {
-      alert('You guessed wrong');
+      this.state.message='You guessed right';
     }
   }
   onGuessThree(){
-    if(this.props.post.a3 === true){
-      alert('You guessed right');
+     this.setState({modalIsOpen: true});
+    if(this.props.post.a3 === 'Truth'){
+      this.state.message ='You guessed wrong';
     } else {
-      alert('You guessed wrong');
+      this.state.message = 'You guessed right';
     }
   }
 
@@ -75,6 +97,17 @@ class PostItem extends Component {
                   <button onClick={this.onGuessTwo} className="btn btn-light mr-1">Guess Two</button>
                   <p className="text-center">{post.q3}</p>
                   <button onClick={this.onGuessThree} className="btn btn-light mr-1">Guess Three</button>
+          </div>
+          <div class="modal-wrapper">
+            <Modal
+              isOpen={this.state.modalIsOpen}
+              onAfterOpen={this.afterOpenModal}
+              onRequestClose={this.closeModal}
+              contentLabel="Example Modal"
+              >
+              <button onClick={this.closeModal}>close</button>
+              <div>{this.state.message}</div>
+            </Modal>
           </div>
           <div className="col-md-10">
             <p className="lead">{post.text}</p>

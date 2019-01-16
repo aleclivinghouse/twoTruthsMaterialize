@@ -129,37 +129,37 @@ export const getPostsFromUser = id => dispatch => {
     );
 };
 
-// export const addLike = id => dispatch => {
-//   axios
-//     .post(`/api/posts/like/${id}`)
-//     .then(res => dispatch(getPosts()))
-//     .catch(err =>
-//       dispatch({
-//         type: GET_ERRORS,
-//         payload: err.response.data
-//       })
-//     );
-// }
-
 export const addLike = id => dispatch => {
-  dispatch(setPostLoading());
   axios
     .post(`/api/posts/like/${id}`)
-    .then(res =>
-      dispatch({
-        type: GET_POSTS,
-        payload: res.data
-      })
-    )
+    .then(res => dispatch(getPosts()))
     .catch(err =>
       dispatch({
-        type: GET_POSTS,
-        payload: null
+        type: GET_ERRORS,
+        payload: err.response.data
       })
     );
-};
+}
 
-
+// export const addLike = id => dispatch => {
+//   dispatch(setPostLoading());
+//   axios
+//     .post(`/api/posts/like/${id}`)
+//     .then(res =>
+//       dispatch({
+//         type: GET_POSTS,
+//         payload: res.data
+//       })
+//     )
+//     .catch(err =>
+//       dispatch({
+//         type: GET_POSTS,
+//         payload: null
+//       })
+//     );
+// };
+//
+//
 export const getPost = id => dispatch => {
   dispatch(setPostLoading());
   axios
