@@ -6,6 +6,13 @@ import { Link } from 'react-router-dom';
 import { deletePost, addLike } from '../../actions/postActions';
 
 class PostItem extends Component {
+  constructor(props){
+    super(props);
+
+    this.onGuessOne = this.onGuessOne.bind(this);
+    this.onGuessTwo = this.onGuessTwo.bind(this);
+    this.onGuessThree = this.onGuessThree.bind(this);
+  }
   onDeleteClick(id) {
     this.props.deletePost(id);
   }
@@ -27,6 +34,30 @@ class PostItem extends Component {
     }
   }
 
+  onGuessOne(){
+    console.log('guess one fired');
+    if(this.props.post.a1 === true){
+      alert('You guessed right');
+    } else {
+      alert('You guessed wrong');
+    }
+  }
+
+  onGuessTwo(){
+    if(this.props.post.a2 === true){
+      alert('You guessed right');
+    }else {
+      alert('You guessed wrong');
+    }
+  }
+  onGuessThree(){
+    if(this.props.post.a3 === true){
+      alert('You guessed right');
+    } else {
+      alert('You guessed wrong');
+    }
+  }
+
   render() {
     const { post, auth, showActions } = this.props;
     console.log('this is the posts likes');
@@ -39,11 +70,11 @@ class PostItem extends Component {
             <br />
             <p className="text-center">{post.name}</p>
               <p className="text-center">{post.q1}</p>
-              <p className="text-center">{post.a1}</p>
-                <p className="text-center">{post.q2}</p>
-                <p className="text-center">{post.a2}</p>
+                <button onClick={this.onGuessOne} className="btn btn-light mr-1">Guess One</button>
+                  <p className="text-center">{post.q2}</p>
+                  <button onClick={this.onGuessTwo} className="btn btn-light mr-1">Guess Two</button>
                   <p className="text-center">{post.q3}</p>
-                  <p className="text-center">{post.a3}</p>
+                  <button onClick={this.onGuessThree} className="btn btn-light mr-1">Guess Three</button>
           </div>
           <div className="col-md-10">
             <p className="lead">{post.text}</p>
