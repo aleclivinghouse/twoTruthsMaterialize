@@ -25,6 +25,7 @@ class PostItem extends Component {
   }
 
   onLikeClick(id) {
+    console.log(id)
     this.props.addLike(id);
   }
 

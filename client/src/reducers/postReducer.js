@@ -1,4 +1,4 @@
-import {ADD_POST, GET_POSTS, GET_POST, POST_LOADING, DELETE_POST, GET_POSTS_FROM_USER} from '../actions/types';
+import {ADD_POST, ADD_LIKE, GET_POSTS, GET_POST, POST_LOADING, DELETE_POST, GET_POSTS_FROM_USER} from '../actions/types';
 
 const initialState = {
   posts: [],
@@ -41,6 +41,19 @@ export default function(state=initialState, action){
         ...state,
         posts: state.posts.filter(post => post._id !== action.payload)
       }
+      case ADD_LIKE:
+      return {
+        ...state,
+        posts: state.posts.map(post => {
+          if(post._id === action.payload._id){
+            post = action.payload;
+            return post;
+          } else {
+            return post;
+          }
+        })
+      }
+
     default:
     return state;
   }

@@ -8,7 +8,8 @@ import {
   POST_LOADING,
   DELETE_POST,
   CLEAR_ERRORS,
-  GET_POSTS_FROM_USER
+  GET_POSTS_FROM_USER,
+  ADD_LIKE
 } from './types';
 
 export const addPost = postData => dispatch => {
@@ -64,22 +65,7 @@ export const addComment = (postId, commentData) => dispatch => {
     }
 
 
-export const deletePost = id => dispatch => {
-  axios
-    .delete(`/api/posts/${id}`)
-    .then(res =>
-      dispatch({
-        type: DELETE_POST,
-        payload: id
-      })
-    )
-    .catch(err =>
-      dispatch({
-        type: GET_ERRORS,
-        payload: err.response.data
-      })
-    );
-};
+
 export const removeLike = id => dispatch => {
   axios
     .post(`/api/posts/unlike/${id}`)
@@ -132,34 +118,56 @@ export const getPostsFromUser = id => dispatch => {
 export const addLike = id => dispatch => {
   axios
     .post(`/api/posts/like/${id}`)
-    .then(res => dispatch(getPosts()))
+    .then(res =>
+      dispatch({
+        type: ADD_LIKE,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err
+      })
+    );
+}
+
+export const deletePost = id => dispatch => {
+  axios
+    .delete(`/api/posts/${id}`)
+    .then(res =>
+      dispatch({
+        type: DELETE_POST,
+        payload: id
+      })
+    )
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
         payload: err.response.data
       })
     );
-}
-
+};
 // export const addLike = id => dispatch => {
 //   dispatch(setPostLoading());
 //   axios
 //     .post(`/api/posts/like/${id}`)
 //     .then(res =>
 //       dispatch({
-//         type: GET_POSTS,
+//         type: GET_POST,
 //         payload: res.data
 //       })
 //     )
 //     .catch(err =>
 //       dispatch({
-//         type: GET_POSTS,
+//         type: GET_POST,
 //         payload: null
 //       })
 //     );
 // };
 //
 //
+
 export const getPost = id => dispatch => {
   dispatch(setPostLoading());
   axios
