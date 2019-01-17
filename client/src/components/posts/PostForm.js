@@ -4,6 +4,7 @@ import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
 import TextFieldGroup from '../common/TextFieldGroup';
 import SelectListGroup from '../common/SelectListGroup';
 import { addPost } from '../../actions/postActions';
+import './css';
 
 class PostForm extends Component {
   constructor(props) {
@@ -15,7 +16,8 @@ class PostForm extends Component {
       a2: '',
       q3: '',
       a3: '',
-      errors: {}
+      errors: {},
+      errorLieCount: ''
     };
 
     this.onChange = this.onChange.bind(this);
@@ -32,7 +34,19 @@ class PostForm extends Component {
     e.preventDefault();
 
     const { user } = this.props.auth;
-
+    let lieCount = 0;
+    if (this.state.a1 === "Lie"){
+      lieCount++;
+    }
+    if (this.state.a2 === "Lie"){
+      lieCount++;
+    }
+    if (this.state.a3 === "Lie"){
+      lieCount++;
+    }
+    if(lieCount !== 1){
+      this.setState({errorLieCount: 'There must be two truths and a lie'})
+    } else {
     const newPost = {
       name: this.state.name,
       q1: this.state.q1,
@@ -52,6 +66,7 @@ class PostForm extends Component {
     this.props.addPost(newPost);
     this.setState({ text: '' });
   }
+}
 
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
@@ -66,6 +81,7 @@ class PostForm extends Component {
 
     return (
       <div className="post-form mb-3">
+        <p className="lieError">{this.state.errorLieCount}</p>
         <div className="card card-info">
           <div className="card-header bg-info text-white"></div>
           <div className="card-body">
