@@ -77,6 +77,37 @@ router.post('/login', (req, res)=>{
     });
 });
 
+// router.put('/addFollower/:followingId/:followerId'(req, res) => {
+//   //add follower
+//   User.findByIdAndUpdate(req.params.followingId, {$push: {followers: req.params.followerId}}, {new: true})
+//   .populate('following', '_id name')
+//   .populate('followers', '_id name')
+//   .exec((err, result) => {
+//     if (err) {
+//       return res.status(400).json({
+//         error: errorHandler.getErrorMessage(err)
+//       })
+//     }
+//     res.json(result)
+//   })
+// }
+//
+// router.put('/addFollowing/:followId/:followerId'(req, res) => {
+//   //add following
+//   User.findByIdAndUpdate(req.params.followerId, {$push: {following: req.params.followingId}}, (err, result) => {
+//     .populate('following', '_id name')
+//     .populate('followers', '_id name')
+//     .exec((err, result) => {
+//     if (err) {
+//       return res.status(400).json({
+//         error: errorHandler.getErrorMessage(err)
+//       })
+//        }
+//     }
+//     res.json(result);
+//   })
+//   }
+
 router.get('/current', passport.authenticate('jwt', {session: false}), (req, res)=> {
   res.json({
     id: req.user.id,

@@ -30,7 +30,7 @@ class ProfileItem extends Component {
                         <p>{post.q1}</p>
                         <p>{post.q2}</p>
                         <p>{post.q3}</p>
-                        <p>{post._id}</p>
+                        <Link to={`/post/${post._id}`}>Go to Post</Link>
                       </li>
                     </div>
                 ))}

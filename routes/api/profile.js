@@ -12,7 +12,7 @@ const User = require('../../models/User');
 router.get('/', passport.authenticate('jwt', {session: false}), () =>{
   const errors = {};
   Profile.findOne({ user: req.user.id })
-    .populate('user', ['name', 'avatar'])
+    .populate('user', ['name', 'avatar', '_id'])
     .then(profile=>{
       if(!profile){
         errors.noprofile = "There is no profile for this user";
