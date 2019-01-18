@@ -137,51 +137,28 @@ router.post(
 );
 
 router.post(
-  'comment/like/:post_id/:comment_id',
+  '/comment/like/:post_id/:comment_id',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
-    Post.findById(req.params.id)
+    Post.findById(req.params.post_id)
     .then(post => {
       console.log('this is the post for liking comment');
       console.log(post);
-      if(post.comments.likes.filter(like => like.user.toString() === req.user.id).length > 0){
-        post.comments.likes = post.comments.likes.filter(like => like.user.toString() !== req.user.id);
-        post.save().then(post => res.json(post));
-      } else {
-        post.comments.likes.unshift({user: req.user.id});
-        post.save().then(post => res.json(post));
+      for(let comment of post.comments){
+        if(comment._id === req.params.comment_id){
+          if(comment.likes.filter(like => like.user.toString() === req.user.id).length > 0){
+            comment.likes = comments.likes.filter(like => like.user.toString() !== req.user.id)
+            post.save().then(post => res.json(post));
+        }else {
+          post.comment.likes.unshift({user: req.user.id});
+          post.save().then(post => res.json(post));
+        }
       }
-
+    }
     })
   }
 );
 
-
-// router.post(
-//   '/like/:id',
-//   passport.authenticate('jwt', { session: false }),
-//   (req, res) => {
-//     Profile.findOne({ user: req.user.id }).then(profile => {
-//       Post.findById(req.params.id)
-//         .then(post => {
-//           if (
-//             post.likes.filter(like => like.user.toString() === req.user.id)
-//               .length > 0
-//           ) {
-//             return res
-//               .status(400)
-//               .json({ alreadyliked: 'User already liked this post' });
-//           }
-//
-//           // Add user id to likes array
-//           post.likes.unshift({ user: req.user.id });
-//
-//           post.save().then(post => res.json(post));
-//         })
-//         .catch(err => res.status(404).json({ postnotfound: 'No post found' }));
-//     });
-//   }
-// );
 
 
 // @route   POST api/posts/unlike/:id
