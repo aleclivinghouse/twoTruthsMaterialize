@@ -9,7 +9,8 @@ import {
   DELETE_POST,
   CLEAR_ERRORS,
   GET_POSTS_FROM_USER,
-  ADD_LIKE
+  ADD_LIKE,
+  LIKE_COMMENT,
 } from './types';
 
 export const addPost = postData => dispatch => {
@@ -131,6 +132,24 @@ export const addLike = id => dispatch => {
       })
     );
 }
+
+export const likeComment = id => dispatch => {
+  axios
+    .post(`/api/posts/like/${id}`)
+    .then(res =>
+      dispatch({
+        type: LIKE_COMMENT,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err
+      })
+    );
+}
+
 
 export const deletePost = id => dispatch => {
   axios

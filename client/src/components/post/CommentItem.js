@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {deleteComment} from '../../actions/postActions';
+import {deleteComment, likeComment} from '../../actions/postActions';
 class CommentItem extends Component{
 
-  onDeleteClick(postId, commentId){
-    this.props.deleteComment(postId, commentId);
+  onLikeComment(id){
+    this.props.likeComment(id)
   }
+
   render(){
     const {comment, postId, auth} = this.props;
     return(
@@ -20,6 +21,7 @@ class CommentItem extends Component{
       <div className="col-md-10">
         <p className="lead">{comment.text}</p>
         {comment.user === auth.user.id ? (
+          <div>
           <button
             onClick={this.onDeleteClick.bind(this, postId, comment._id)}
             type="button"
@@ -27,6 +29,14 @@ class CommentItem extends Component{
           >
             <i className="fas fa-times" />
           </button>
+          <button
+            onClick={this.onLikeComment.bind(this, postId, comment._id)}
+            type="button"
+            className="btn btn-danger mr-1"
+          >
+            <i className="fas fa-times" />
+          </button>
+          </div>
         ) : null }
       </div>
     </div>
@@ -39,4 +49,4 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps, {deleteComment})(CommentItem);
+export default connect(mapStateToProps, {deleteComment, likeComment})(CommentItem);

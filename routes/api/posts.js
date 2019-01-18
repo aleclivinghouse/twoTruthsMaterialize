@@ -136,6 +136,26 @@ router.post(
   }
 );
 
+router.post(
+  'comment/like/:id',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    Post.findById(req.params.id)
+    .then(post => {
+      console.log('this is the post');
+      if(post.comments.likes.filter(like => like.user.toString() === req.user.id).length > 0){
+        post.comments.likes = post.comments.likes.filter(like => like.user.toString() !== req.user.id);
+        post.save().then(post => res.json(post));
+      } else {
+        post.comments.likes.unshift({user: req.user.id});
+        post.save().then(post => res.json(post));
+      }
+
+    })
+  }
+);
+
+
 // router.post(
 //   '/like/:id',
 //   passport.authenticate('jwt', { session: false }),
