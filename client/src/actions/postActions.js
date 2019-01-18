@@ -135,7 +135,7 @@ export const addLike = id => dispatch => {
 
 export const likeComment = id => dispatch => {
   axios
-    .post(`/api/posts/like/${id}`)
+    .post(`/api/posts/comment/like/${id}`)
     .then(res =>
       dispatch({
         type: LIKE_COMMENT,

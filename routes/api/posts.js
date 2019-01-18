@@ -137,12 +137,13 @@ router.post(
 );
 
 router.post(
-  'comment/like/:id',
+  'comment/like/:post_id/:comment_id',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
     Post.findById(req.params.id)
     .then(post => {
-      console.log('this is the post');
+      console.log('this is the post for liking comment');
+      console.log(post);
       if(post.comments.likes.filter(like => like.user.toString() === req.user.id).length > 0){
         post.comments.likes = post.comments.likes.filter(like => like.user.toString() !== req.user.id);
         post.save().then(post => res.json(post));
