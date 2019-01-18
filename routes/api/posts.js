@@ -142,20 +142,21 @@ router.post(
   (req, res) => {
     Post.findById(req.params.post_id)
     .then(post => {
-      console.log('this is the post for liking comment');
-      console.log(post);
-      for(let comment of post.comments){
-        if(comment._id === req.params.comment_id){
-          if(comment.likes.filter(like => like.user.toString() === req.user.id).length > 0){
-            comment.likes = comments.likes.filter(like => like.user.toString() !== req.user.id)
-            post.save().then(post => res.json(post));
-        }else {
-          post.comment.likes.unshift({user: req.user.id});
-          post.save().then(post => res.json(post));
+        let theComment = post.comments.find(comment => comment.id === req.params.comment_id);
+        console.log('this is the comment found');
+        console.log(theComment);
+        if (
+          theComment.likes.filter(like => like.user.toString() === req.user.id)
+          .length > 0
+        ){
+          theComment.likes = theComment.likes.filter(like => like.user.toString() !== req.user.id);
+          theComment.save().then(theComment=> res.json(theComment));
+        } else {
+          theComment.likes.unshift({ user: req.user.id });
+          theComment.save().then(theComment => res.json(theComment));
         }
-      }
-    }
     })
+    .catch(err => res.status(404).json({ postnotfound: 'No post found' }));
   }
 );
 
