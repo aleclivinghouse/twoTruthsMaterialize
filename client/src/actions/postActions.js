@@ -99,22 +99,7 @@ export const getPostsFromUser = id => dispatch => {
     );
 };
 
-export const addLike = id => dispatch => {
-  axios
-    .post(`/api/posts/like/${id}`)
-    .then(res =>
-      dispatch({
-        type: ADD_LIKE,
-        payload: res.data
-      })
-    )
-    .catch(err =>
-      dispatch({
-        type: GET_ERRORS,
-        payload: err
-      })
-    );
-}
+
 
 export const deleteComment = (postId, commentId) => dispatch => {
   axios
@@ -134,11 +119,30 @@ export const deleteComment = (postId, commentId) => dispatch => {
   }
 
 export const likeComment = (postId, commentId) => dispatch => {
+  console.log('postId in action');
+  console.log(postId);
   axios
     .post(`/api/posts/comment/like/${postId}/${commentId}`)
-    .then(res =>
+    .then(res => {console.log(res);
       dispatch({
         type: LIKE_COMMENT,
+        payload: res.data
+      })
+     })
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err
+      })
+    );
+}
+
+export const addLike = id => dispatch => {
+  axios
+    .post(`/api/posts/like/${id}`)
+    .then(res =>
+      dispatch({
+        type: ADD_LIKE,
         payload: res.data
       })
     )
@@ -149,7 +153,6 @@ export const likeComment = (postId, commentId) => dispatch => {
       })
     );
 }
-
 
 export const deletePost = id => dispatch => {
   axios

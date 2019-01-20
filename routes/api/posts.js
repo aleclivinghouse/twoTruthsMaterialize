@@ -143,18 +143,34 @@ router.post(
     Post.findById(req.params.post_id)
     .then(post => {
         let theComment = post.comments.find(comment => comment.id === req.params.comment_id);
-        console.log('this is the comment found');
-        console.log(theComment);
         if (
           theComment.likes.filter(like => like.user.toString() === req.user.id)
           .length > 0
         ){
           theComment.likes = theComment.likes.filter(like => like.user.toString() !== req.user.id);
-          theComment.save().then(theComment=> res.json(theComment));
+          //replace the comment on post with this comment
+
+          // theComment.save().then(theComment=> res.json(theComment));
+          const removeIndex = post.comments
+            .map(item => item._id.toString())
+            .indexOf(req.params.comment_id);
+
+            post.comments.splice(removeIndex, 1);
+            post.comments.push(theComment);
+            post.save().then(post => res.json(post));
+
         } else {
           theComment.likes.unshift({ user: req.user.id });
-          theComment.save().then(theComment => res.json(theComment));
+
+          const removeIndex = post.comments
+            .map(item => item._id.toString())
+            .indexOf(req.params.comment_id);
+            post.comments.splice(removeIndex, 1);
+            post.comments.push(theComment);
+            post.save().then(post => res.json(post));
+
         }
+
     })
     .catch(err => res.status(404).json({ postnotfound: 'No post found' }));
   }
@@ -258,6 +274,7 @@ router.delete(
 
         // Splice comment out of array
         post.comments.splice(removeIndex, 1);
+
 
         post.save().then(post => res.json(post));
       })

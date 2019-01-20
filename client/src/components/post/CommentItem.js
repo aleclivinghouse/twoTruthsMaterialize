@@ -8,6 +8,7 @@ class CommentItem extends Component {
     this.props.deleteComment(postId, commentId);
   }
   onLikeComment(postId, commentId) {
+    console.log('button fired on the client');
     this.props.likeComment(postId, commentId);
   }
 
