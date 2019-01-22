@@ -3,11 +3,18 @@ import { connect } from 'react-redux';
 import {Link} from 'react-router-dom';
 import isEmpty from '../../validation/is-empty';
 import {getPostsFromUser} from '../../actions/postActions';
-
+import {setFollow} from '../../actions/followActions';
 
 class ProfileItem extends Component {
   componentDidMount(){
+    console.log('these are the props');
+    console.log(this.props);
     this.props.getPostsFromUser(this.props.profile.user._id);
+  }
+
+  onFollowClick(){
+    console.log('on follow click fired');
+    this.props.setFollow(this.props.auth.user.id, this.props.profile.user._id)
   }
   render(){
     const profile = this.props.profile;
@@ -35,8 +42,12 @@ class ProfileItem extends Component {
                     </div>
                 ))}
                 </ul>
-
           </div>
+        </div>
+        <div>
+          <button onClick={this.onFollowClick}>
+            Follow
+          </button>
         </div>
         <div className="cold-md-4 d-none d-md-block">
           <h4>Things I like</h4>
@@ -55,7 +66,8 @@ class ProfileItem extends Component {
   }
 }
 const mapStateToProps = state => ({
-  post: state.post
+  post: state.post,
+  auth: state.auth
 });
 
-export default connect(mapStateToProps, {getPostsFromUser})(ProfileItem);
+export default connect(mapStateToProps, {getPostsFromUser, setFollow})(ProfileItem);

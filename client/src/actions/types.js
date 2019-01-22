@@ -14,3 +14,4 @@ export const DELETE_POST = 'DELETE_POST';
 export const GET_POSTS_FROM_USER = 'GET_POSTS_FROM_USER';
 export const ADD_LIKE = 'ADD_LIKE';
 export const LIKE_COMMENT = 'LIKE_COMMENT';
+export const SET_FOLLOW = 'SET_FOLLOW';

@@ -30,15 +30,11 @@ router.post('/', passport.authenticate('jwt', {session: false}), (req, res) =>{
     return res.status(400).json(errors);
   }
   const profileFields = {};
-  console.log('below are the skills');
-  console.log(req.body.skills);
   profileFields.user = req.user.id;
   if (req.body.handle) profileFields.handle = req.body.handle;
   if (req.body.bio) profileFields.bio = req.body.bio;
   if(typeof req.body.skills !== 'undefined'){
     profileFields.skills = req.body.skills.split(',');
-    console.log('here are the skills after they are split');
-    console.log(req.body.skills);
   }
 
  Profile.findOne({user: req.user.id}).then(profile => {

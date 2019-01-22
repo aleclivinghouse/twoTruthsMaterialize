@@ -5,6 +5,7 @@ import classnames from 'classnames';
 import { Link } from 'react-router-dom';
 import { deletePost, addLike } from '../../actions/postActions';
 import Modal from 'react-modal';
+import './css';
 
 class PostItem extends Component {
   constructor(props){
@@ -92,12 +93,12 @@ closeModal() {
           <div className="col-md-2">
             <br />
             <p className="text-center">{post.name}</p>
-              <p className="text-center">{post.q1}</p>
-                <button onClick={this.onGuessOne} className="btn btn-light mr-1">Guess One</button>
-                  <p className="text-center">{post.q2}</p>
-                  <button onClick={this.onGuessTwo} className="btn btn-light mr-1">Guess Two</button>
-                  <p className="text-center">{post.q3}</p>
-                  <button onClick={this.onGuessThree} className="btn btn-light mr-1">Guess Three</button>
+              <p className="text-center post-to-guess">{post.q1}</p>
+                <button onClick={this.onGuessOne} className="btn btn-light mr-1 guess-button">Guess One</button>
+                  <p className="text-center post-to-guess">{post.q2}</p>
+                  <button onClick={this.onGuessTwo} className="btn btn-light mr-1 guess-button">Guess Two</button>
+                  <p className="text-center post-to-guess">{post.q3}</p>
+                  <button onClick={this.onGuessThree} className="btn btn-light mr-1 guess-button">Guess Three</button>
           </div>
           <div class="modal-wrapper">
             <Modal

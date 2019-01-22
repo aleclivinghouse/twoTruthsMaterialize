@@ -75,13 +75,13 @@ router.post('/login', (req, res)=>{
         }
       });
     });
-});
+})
 
-// router.put('/addFollower/:followingId/:followerId'(req, res) => {
+// router.put('/addFollower/:followingId/:followerId', (req, res) => {
 //   //add follower
 //   User.findByIdAndUpdate(req.params.followingId, {$push: {followers: req.params.followerId}}, {new: true})
-//   .populate('following', '_id name')
-//   .populate('followers', '_id name')
+//   .populate('following')
+//   .populate('followers')
 //   .exec((err, result) => {
 //     if (err) {
 //       return res.status(400).json({
@@ -90,23 +90,28 @@ router.post('/login', (req, res)=>{
 //     }
 //     res.json(result)
 //   })
-// }
-//
-// router.put('/addFollowing/:followId/:followerId'(req, res) => {
+// });
+// //
+
+
+//.populate
+//whenever you need it
+//get all the ones where the user is following or followed
+// router.put('/addFollowing/:followingId/:followerId', (req, res) => {
 //   //add following
-//   User.findByIdAndUpdate(req.params.followerId, {$push: {following: req.params.followingId}}, (err, result) => {
-//     .populate('following', '_id name')
-//     .populate('followers', '_id name')
-//     .exec((err, result) => {
+//   //first make sure it does not already exist
+//   //then create it
+//
+//   User.findByIdAndUpdate(req.params.followerId, {$push: {following: req.params.followingId}}, (err, result))
+//     .then((err, result) => {
 //     if (err) {
 //       return res.status(400).json({
 //         error: errorHandler.getErrorMessage(err)
 //       })
-//        }
 //     }
 //     res.json(result);
-//   })
-//   }
+//   });
+
 
 router.get('/current', passport.authenticate('jwt', {session: false}), (req, res)=> {
   res.json({

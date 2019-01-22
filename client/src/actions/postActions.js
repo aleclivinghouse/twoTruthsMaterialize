@@ -99,8 +99,6 @@ export const getPostsFromUser = id => dispatch => {
     );
 };
 
-
-
 export const deleteComment = (postId, commentId) => dispatch => {
   axios
     .delete(`/api/posts/comment/${postId}/${commentId}`)

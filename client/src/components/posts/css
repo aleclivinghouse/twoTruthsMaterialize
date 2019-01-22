@@ -1,3 +1,11 @@
 .lieError{
   color: red;
 }
+
+.post-to-guess{
+  display: inline-block;
+}
+
+.guess-button{
+  display: inline-block;
+}
