@@ -5,7 +5,7 @@ import classnames from 'classnames';
 import { Link } from 'react-router-dom';
 import { deletePost, addLike } from '../../actions/postActions';
 import Modal from 'react-modal';
-import './css';
+import './css.css';
 
 class PostItem extends Component {
   constructor(props){
@@ -88,18 +88,24 @@ closeModal() {
     console.log(post.likes);
 
     return (
-      <div className="card card-body mb-3">
-        <div className="row">
-          <div className="col-md-2">
-            <br />
+      <div className="card card-body">
+        <div className="container">
+          <div className="row">
+          <div className="col-md-4 first-column">
             <p className="text-center">{post.name}</p>
-              <p className="text-center post-to-guess">{post.q1}</p>
-                <button onClick={this.onGuessOne} className="btn btn-light mr-1 guess-button">Guess One</button>
-                  <p className="text-center post-to-guess">{post.q2}</p>
-                  <button onClick={this.onGuessTwo} className="btn btn-light mr-1 guess-button">Guess Two</button>
-                  <p className="text-center post-to-guess">{post.q3}</p>
-                  <button onClick={this.onGuessThree} className="btn btn-light mr-1 guess-button">Guess Three</button>
-          </div>
+              <p className="post-to-guess">{post.q1}</p>
+              <button onClick={this.onGuessOne} className="btn btn-light guess-button">Guess One</button>
+           </div>
+                <div className="col-md-4">
+                  <p className="post-to-guess">{post.q2}</p>
+                  <button onClick={this.onGuessTwo} className="btn btn-light guess-button">Guess Two</button>
+                </div>
+                <div className="col-md-4">
+                  <p className="post-to-guess">{post.q3}</p>
+                  <button onClick={this.onGuessThree} className="btn btn-light  guess-button">Guess Three</button>
+                </div>
+                </div>
+              </div>
           <div class="modal-wrapper">
             <Modal
               isOpen={this.state.modalIsOpen}
@@ -143,7 +149,6 @@ closeModal() {
             ) : null}
           </div>
         </div>
-      </div>
     );
   }
 }

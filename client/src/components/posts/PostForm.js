@@ -4,7 +4,7 @@ import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
 import TextFieldGroup from '../common/TextFieldGroup';
 import SelectListGroup from '../common/SelectListGroup';
 import { addPost } from '../../actions/postActions';
-import './css';
+import './css.css';
 
 class PostForm extends Component {
   constructor(props) {

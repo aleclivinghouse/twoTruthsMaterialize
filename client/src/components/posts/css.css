@@ -2,10 +2,14 @@
   color: red;
 }
 
-.post-to-guess{
+/* .post-to-guess{
   display: inline-block;
 }
 
 .guess-button{
   display: inline-block;
+} */
+
+div.col-md-4.first-column{
+  margin-top: -15px;
 }

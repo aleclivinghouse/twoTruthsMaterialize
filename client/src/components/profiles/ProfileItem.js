@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 import isEmpty from '../../validation/is-empty';
 import {getPostsFromUser} from '../../actions/postActions';
 import {setFollow} from '../../actions/followActions';
+import Follow from './Follow';
 
 class ProfileItem extends Component {
   componentDidMount(){
@@ -18,16 +19,14 @@ class ProfileItem extends Component {
   }
   render(){
     const profile = this.props.profile;
-    console.log('this is the whole post object in the profileItems component');
-    console.log(this.props.post);
-    console.log('these are the posts in the profileItem component');
     const posts = this.props.post.posts;
-    console.log(posts);
     let questionsArray = [];
     return(
+
       <div className="card card-body bg-light mb-3">
         <div className="row">
           <div className="col-lg-6 col-md-4 col-8">
+              <Follow />
               <h3>{profile.user.name}</h3>
               <p>{profile.bio}</p>
                 <ul>
@@ -45,7 +44,7 @@ class ProfileItem extends Component {
           </div>
         </div>
         <div>
-          <button onClick={this.onFollowClick}>
+          <button onClick={this.onFollowClick.bind(this)}>
             Follow
           </button>
         </div>
@@ -67,7 +66,7 @@ class ProfileItem extends Component {
 }
 const mapStateToProps = state => ({
   post: state.post,
-  auth: state.auth
+  auth: state.auth,
 });
 
 export default connect(mapStateToProps, {getPostsFromUser, setFollow})(ProfileItem);
