@@ -31,12 +31,13 @@ router.post('/:followingId/:followerId', (req, res) => {
 //get all of the people following a user
 router.get('/followers/:id', (req, res) => {
   Follow.find({following: req.params.id})
-  // .populate('following')
+  .populate('follower')
   .then(follow =>res.json(follow))
 });
 //get the people the user is following
 router.get('/following/:id', (req, res)=> {
   Follow.find({follower: req.params.id})
+  .populate('following')
   .then(follow => res.json(follow))
 });
 

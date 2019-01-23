@@ -18,6 +18,8 @@ class ProfileItem extends Component {
     this.props.setFollow(this.props.auth.user.id, this.props.profile.user._id)
   }
   render(){
+    console.log('here are the props in ProfileItem');
+    console.log(this.props);
     const profile = this.props.profile;
     const posts = this.props.post.posts;
     let questionsArray = [];
