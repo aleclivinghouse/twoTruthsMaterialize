@@ -3,11 +3,12 @@ import { connect } from 'react-redux';
 import {Link} from 'react-router-dom';
 import {getFollowers} from '../../actions/followActions';
 import {getFollowing} from '../../actions/followActions';
+import Collapsible from 'react-collapsible';
 
 class Follow extends Component{
   componentDidMount(){
-    this.props.getFollowers(this.props.auth.user.id);
-    this.props.getFollowing(this.props.auth.user.id);
+    this.props.getFollowers(this.props.theId);
+    this.props.getFollowing(this.props.theId);
   }
   render(){
     console.log('here are  the props in following');
@@ -23,16 +24,17 @@ class Follow extends Component{
     for(let follower of followers){
       followerNames.push(follower.follower.name);
     }
+
     return(
       <div>
-          <h6>Follow Component Rendered</h6>
+         <Collapsible trigger="See Friends">
           <div>
             <h6>Followers</h6>
             {followerNames.map(p => <li key={p.id}>{p}</li>)}
             <h6>Following</h6>
               {followingNames.map(p => <li key={p.id}>{p}</li>)}
          </div>
-        );
+         </Collapsible>
       </div>
     )
   }

@@ -9,7 +9,7 @@ const validateEducationInput = require('../../validation/experience');
 const Profile = require('../../models/Profile');
 const User = require('../../models/User');
 
-router.get('/', passport.authenticate('jwt', {session: false}), () =>{
+router.get('/', passport.authenticate('jwt', {session: false}), (req, res) =>{
   const errors = {};
   Profile.findOne({ user: req.user.id })
     .populate('user', ['name', 'avatar', '_id'])

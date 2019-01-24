@@ -30,14 +30,6 @@ class CommentItem extends Component {
             </a>
             <br />
             <div>
-              <button
-                onClick={this.onLikeComment.bind(this, postId, comment._id)}
-                type="button"
-                className="btn btn-light mr-1"
-              >
-                <i className='fas fa-thumbs-up'  />
-                <span className="badge badge-light">{comment.likes.length}</span>
-              </button>
             </div>
             <p className="text-center">{comment.name}</p>
           </div>
@@ -53,6 +45,14 @@ class CommentItem extends Component {
 
               </button>
             ) : null}
+            <button
+              onClick={this.onLikeComment.bind(this, postId, comment._id)}
+              type="button"
+              className="btn btn-light mr-1"
+            >
+              <i className='fas fa-thumbs-up'  />
+              <span className="badge badge-light">{comment.likes.length}</span>
+            </button>
           </div>
         </div>
       </div>

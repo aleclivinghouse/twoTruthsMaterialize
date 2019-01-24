@@ -12,18 +12,15 @@ export default function(state = initialState, action){
     case SET_FOLLOW:
     return {
       ...state,
-      follows: [action.payload, ...state.posts]
+      followers: [action.payload, ...state.followers]
     }
     case GET_FOLLOWERS:
-    console.log('this is the followers');
     console.log(action.payload);
     return {
       ...state,
       followers: action.payload
     }
     case GET_FOLLOWING:
-    console.log('this is the following');
-    console.log(action.payload);
     return {
       ...state,
       following: action.payload

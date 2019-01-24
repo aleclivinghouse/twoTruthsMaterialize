@@ -15,7 +15,7 @@ class ProfileItem extends Component {
 
   onFollowClick(){
     console.log('on follow click fired');
-    this.props.setFollow(this.props.auth.user.id, this.props.profile.user._id)
+    this.props.setFollow(this.props.profile.user._id, this.props.auth.user.id)
   }
   render(){
     console.log('here are the props in ProfileItem');
@@ -24,11 +24,10 @@ class ProfileItem extends Component {
     const posts = this.props.post.posts;
     let questionsArray = [];
     return(
-
       <div className="card card-body bg-light mb-3">
         <div className="row">
           <div className="col-lg-6 col-md-4 col-8">
-              <Follow />
+              <Follow theId={this.props.profile.user._id}/>
               <h3>{profile.user.name}</h3>
               <p>{profile.bio}</p>
                 <ul>

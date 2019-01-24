@@ -15,14 +15,15 @@ const Follow = require('../../models/Follow');
 router.post('/:followingId/:followerId', (req, res) => {
   Follow.findOne({follower: req.params.followerId, following: req.params.followingId}).then(follow => {
     if(follow){
-      erros.handle = "That follow already exists";
-      res.status(400).json(errors);
+      res.status(400).json({handle: "That follow already exists"});
     } else {
       const newFollow = new Follow({
         follower: req.params.followerId,
         following: req.params.followingId
       });
-      newFollow.save().then(follow => res.json(follow));
+      newFollow.save()
+     .then(follow => Follow.findOne({_id:follow._id}).populate('follower'))
+     .then(follow => res.json(follow));
     }
   })
 });
