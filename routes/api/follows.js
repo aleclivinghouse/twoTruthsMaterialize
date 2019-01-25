@@ -42,4 +42,8 @@ router.get('/following/:id', (req, res)=> {
   .then(follow => res.json(follow))
 });
 
+router.delete('/following/:id', (req, res)=> {
+
+})
+
 module.exports = router;

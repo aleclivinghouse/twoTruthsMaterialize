@@ -4,12 +4,19 @@ import {Link} from 'react-router-dom';
 import {getFollowers} from '../../actions/followActions';
 import {getFollowing} from '../../actions/followActions';
 import Collapsible from 'react-collapsible';
+import './main.css';
 
 class Follow extends Component{
   componentDidMount(){
     this.props.getFollowers(this.props.theId);
     this.props.getFollowing(this.props.theId);
   }
+
+  onDeleteClick(id){
+      this.props.unFollow(id);
+  }
+
+
   render(){
     console.log('here are  the props in following');
     console.log(this.props);
@@ -19,20 +26,37 @@ class Follow extends Component{
     let followingNames = [];
 
     for(let follow of following){
-      followingNames.push(follow.following.name);
+      let map = {};
+      map.name = follow.following.name;
+      map._id = follow._id
+      followingNames.push(map);
+      console.log('this is a follow');
+      console.log(follow);
     }
     for(let follower of followers){
-      followerNames.push(follower.follower.name);
+      let map = {};
+      map.name = follower.follower.name;
+      followerNames.push(map);
+      console.log('this is the follower map');
+      console.log(map);
     }
 
     return(
       <div>
-         <Collapsible trigger="See Friends">
+         <Collapsible trigger="See Follows" className="btn btn-secondary">
           <div>
             <h6>Followers</h6>
-            {followerNames.map(p => <li key={p.id}>{p}</li>)}
+            <ul className="list">
+            {followerNames.map(p => <div><li key={p._id}>{p.name}</li>
+              </div>
+             )}
+            </ul>
             <h6>Following</h6>
-              {followingNames.map(p => <li key={p.id}>{p}</li>)}
+            <ul className="list">
+              {followingNames.map(p => <div><li key={p._id}>{p.name}</li>
+                </div>
+          )}
+            </ul>
          </div>
          </Collapsible>
       </div>

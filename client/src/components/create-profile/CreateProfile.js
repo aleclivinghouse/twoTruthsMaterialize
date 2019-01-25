@@ -27,7 +27,6 @@ class CreateProfile extends Component {
 onSubmit(e){
   e.preventDefault();
   const profileData = {
-    handle: this.state.handle,
     bio: this.state.bio,
     skills: this.state.skills,
     subject: this.state.subject
@@ -78,14 +77,6 @@ onChange(e){
             onChange={this.onChange}
             error = {errors.bio}
             info="write a short bio"
-            />
-            <TextFieldGroup
-              placeholder="* Profile Handle"
-              name="handle"
-              value={this.state.handle}
-              onChange={this.onChange}
-              error={errors.handle}
-              info="A unique handle for your profile URL. Your full name, company name, nickname"
             />
           <input type="submit" value="Submit" className="btn btn-info btn-block"/>
           </form>

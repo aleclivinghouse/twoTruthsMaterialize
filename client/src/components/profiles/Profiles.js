@@ -32,9 +32,9 @@ class Profiles extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-12">
-              <h1 className="display-4 text-center">Developer Profiles</h1>
+              <h1 className="display-4 text-center">Two Truths and A Lie</h1>
               <p className="lead text-center">
-                Browse and connect with developers
+                Play two truths and a lie with strangers
               </p>
               {profileItems}
             </div>

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {SET_FOLLOW, GET_ERRORS, GET_FOLLOWERS, GET_FOLLOWING} from './types';
+import {SET_FOLLOW, GET_ERRORS, GET_FOLLOWERS, GET_FOLLOWING, UN_FOLLOW} from './types';
 
 
 export const setFollow = (followingId, followerId) => dispatch => {

@@ -1,5 +1,5 @@
 import isEmpty from '../validation/is-empty';
-import { SET_FOLLOW, GET_FOLLOWERS, GET_FOLLOWING } from '../actions/types';
+import { SET_FOLLOW, GET_FOLLOWERS, UN_FOLLOW, GET_FOLLOWING } from '../actions/types';
 
 const initialState = {
   follows: [],
@@ -25,6 +25,12 @@ export default function(state = initialState, action){
       ...state,
       following: action.payload
     }
+    case UN_FOLLOW:
+    return {
+      ...state,
+      followers: state.followers.filter(follower => follower._id !== action.payload)
+    }
+
     default:
       return state;
   }

@@ -45,7 +45,7 @@ class ProfileItem extends Component {
           </div>
         </div>
         <div>
-          <button onClick={this.onFollowClick.bind(this)}>
+          <button onClick={this.onFollowClick.bind(this)} className="btn-info">
             Follow
           </button>
         </div>

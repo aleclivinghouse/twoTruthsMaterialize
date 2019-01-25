@@ -90,14 +90,6 @@ onChange(e){
             error = {errors.bio}
             info="write a short bio"
             />
-            <TextFieldGroup
-              placeholder="* Profile Handle"
-              name="handle"
-              value={this.state.handle}
-              onChange={this.onChange}
-              error={errors.handle}
-              info="A unique handle for your profile URL. Your full name, company name, nickname"
-            />
           <input type="submit" value="Submit" className="btn btn-info btn-block"/>
           </form>
           </div>
