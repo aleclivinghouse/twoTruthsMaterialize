@@ -21,6 +21,8 @@ class Follow extends Component{
     console.log('here are  the props in following');
     console.log(this.props);
     let followers = this.props.follow.followers;
+    console.log('these are the followers');
+    console.log(followers);
     let following = this.props.follow.following;
     let followerNames = [];
     let followingNames = [];
