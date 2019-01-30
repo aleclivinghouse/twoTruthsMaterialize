@@ -18,44 +18,25 @@ class Follow extends Component{
 
 
   render(){
-    console.log('here are  the props in following');
-    console.log(this.props);
     let followers = this.props.follow.followers;
     console.log('these are the followers');
     console.log(followers);
     let following = this.props.follow.following;
-    let followerNames = [];
-    let followingNames = [];
-
-    for(let follow of following){
-      let map = {};
-      map.name = follow.following.name;
-      map._id = follow._id
-      followingNames.push(map);
-      console.log('this is a follow');
-      console.log(follow);
-    }
-    for(let follower of followers){
-      let map = {};
-      map.name = follower.follower.name;
-      followerNames.push(map);
-      console.log('this is the follower map');
-      console.log(map);
-    }
-
+    console.log('here are the following');
+    console.log(following)
     return(
       <div>
          <Collapsible trigger="See Follows" className="btn btn-secondary">
           <div>
             <h6>Followers</h6>
             <ul className="list">
-            {followerNames.map(p => <div><li key={p._id}>{p.name}</li>
+            {followers.map(p => <div><li key={p._id}>{p.follower.name}</li>
               </div>
              )}
             </ul>
             <h6>Following</h6>
             <ul className="list">
-              {followingNames.map(p => <div><li key={p._id}>{p.name}</li>
+              {following.map(p => <div><li key={p._id}>{p.following.name}</li>
                 </div>
           )}
             </ul>

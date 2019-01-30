@@ -8,18 +8,13 @@ import Follow from './Follow';
 
 class ProfileItem extends Component {
   componentDidMount(){
-    console.log('these are the props');
-    console.log(this.props);
     this.props.getPostsFromUser(this.props.profile.user._id);
   }
 
   onFollowClick(){
-    console.log('on follow click fired');
     this.props.setFollow(this.props.profile.user._id, this.props.auth.user.id)
   }
   render(){
-    console.log('here are the props in ProfileItem');
-    console.log(this.props);
     const profile = this.props.profile;
     const posts = this.props.post.posts;
     let questionsArray = [];

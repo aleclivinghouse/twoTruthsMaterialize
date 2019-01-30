@@ -20,13 +20,9 @@ export const setFollow = (followingId, followerId) => dispatch => {
 }
 
 export const getFollowers = id => dispatch => {
-  console.log('here is a string in getFollowers');
   axios
     .get(`/api/follow/followers/${id}`)
     .then(res => {
-      console.log('here is the repsponse in getFollowers');
-      console.log(res);
-
       dispatch({
         type: GET_FOLLOWERS,
         payload: res.data
