@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {getCurrentProfile, deleteAccount} from '../../actions/profileActions';
-import ProfileActions from './ProfileActions';
 
 
 class Dashboard extends Component{
@@ -32,7 +31,9 @@ class Dashboard extends Component{
           <p className="lead text-muted"><Link to={`/dashboard`}>Welcome {user.name} </Link></p>
           <div style={{marginBottom: '60px'}} />
           <button onClick={this.onDeleteClick.bind(this)} className="btn btn-danger">Delete My Account-0</button>
-          <ProfileActions />
+              <Link to="/edit-profile" className="btn btn-light">
+                <i class="fas fa-user-circle text-info mr-1" /> Edit Profile
+              </Link>
         </div>
       );
     } else {
