@@ -7,6 +7,7 @@ import {setFollow} from '../../actions/followActions';
 import Follow from './Follow';
 
 class ProfileItem extends Component {
+  //this is the route API/posts/user/id
   componentDidMount(){
     this.props.getPostsFromUser(this.props.profile.user._id);
   }

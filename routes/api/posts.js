@@ -5,6 +5,7 @@ const passport = require('passport');
 
 // Post model
 const Post = require('../../models/Post');
+const Follow = require('../../models/Follow');
 // Profile model
 const Profile = require('../../models/Profile');
 
@@ -26,12 +27,31 @@ router.get('/', (req, res) => {
     .catch(err => res.status(404).json({ nopostsfound: 'No posts found' }));
 });
 
+// router.get('/user/:id', (req, res) => {
+//   let map = {}
+//   let posts = Post.find({ user: req.params.id });
+//   let followers = Follow.find({following: req.params.id});
+//   let following = Follower.find({follower: req.params.id})
+//   map.posts = posts;
+//   map.followers = followers;
+//   map.following = following;
+//   map.save()
+//   .then(map => res.json(map))
+//     // .sort({ date: -1 })
+//     // .then(posts => res.json(posts))
+//     // .catch(err => res.status(404).json({ nopostsfound: 'No posts found' }));
+// });
+
 router.get('/user/:id', (req, res) => {
-  Post.find({ user: req.params.id })
-    .sort({ date: -1 })
-    .then(posts => res.json(posts))
-    .catch(err => res.status(404).json({ nopostsfound: 'No posts found' }));
+  Promise.all([
+     Post.find({ user: req.params.id }),
+    Follow.find({following: req.params.id}),
+    Follow.find({follower: req.params.id})
+  ]).then( results => {
+    res.json(results);
+  })
 });
+
 
 // @route   GET api/posts/:id
 // @desc    Get post by id

@@ -12,18 +12,17 @@ class Follow extends Component{
     this.props.getFollowing(this.props.theId);
   }
 
-  onDeleteClick(id){
-      this.props.unFollow(id);
-  }
 
 
   render(){
+    console.log('these are the props with ray');
+    console.log(this.props);
     let followers = this.props.follow.followers;
-    console.log('these are the followers');
-    console.log(followers);
+    // console.log('these are the followers');
+    // console.log(followers);
     let following = this.props.follow.following;
-    console.log('here are the following');
-    console.log(following)
+    // console.log('here are the following');
+    // console.log(following)
     return(
       <div>
          <Collapsible trigger="See Follows" className="btn btn-secondary">
