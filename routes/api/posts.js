@@ -45,8 +45,8 @@ router.get('/', (req, res) => {
 router.get('/user/:id', (req, res) => {
   Promise.all([
      Post.find({ user: req.params.id }),
-    Follow.find({following: req.params.id}),
-    Follow.find({follower: req.params.id})
+    Follow.find({following: req.params.id}).populate('follower'),
+    Follow.find({follower: req.params.id}).populate('following')
   ]).then( results => {
     res.json(results);
   })

@@ -8,7 +8,7 @@ import Follow from './Follow';
 
 class ProfileItem extends Component {
   //this is the route API/posts/user/id
-  componentDidMount(){
+  componentWillMount(){
     this.props.getPostsFromUser(this.props.profile.user._id);
   }
 
@@ -18,12 +18,24 @@ class ProfileItem extends Component {
   render(){
     const profile = this.props.profile;
     const posts = this.props.post.posts;
-    let questionsArray = [];
+    console.log('these are the posts');
+    console.log(posts);
+  let following = this.props.post.posts[1];
+  let followers = this.props.post.posts[2];
+  let followComponent;
+  if(following !== undefined && followers !== undefined){
+   followComponent =  <Follow theId={this.props.profile.user._id} following={following} followers={followers}/>
+   }
+
+  // console.log('these are the following in the profileItem component');
+  // console.log(following);
+  // console.log('these are the followers in the profileItem component');
+  // console.log(followers);
     return(
       <div className="card card-body bg-light mb-3">
         <div className="row">
           <div className="col-lg-6 col-md-4 col-8">
-              <Follow theId={this.props.profile.user._id}/>
+                  {followComponent}
               <h3>{profile.user.name}</h3>
               <p>{profile.bio}</p>
                 <ul>

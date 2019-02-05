@@ -63,7 +63,7 @@ class PostItem extends Component {
 //   // references are now sync'd and can be accessed.
 //   this.subtitle.style.color = '#f00';
 // }
-
+//TODO: avoid mutating state
 closeModal() {
   this.setState({modalIsOpen: false});
 }

@@ -7,7 +7,7 @@ import { getProfiles } from '../../actions/profileActions';
 import {getPostsFromUser} from '../../actions/postActions';
 
 class Profiles extends Component {
-  componentDidMount() {
+  componentWillMount() {
     this.props.getProfiles();
   }
 

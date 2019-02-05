@@ -7,40 +7,36 @@ import Collapsible from 'react-collapsible';
 import './main.css';
 
 class Follow extends Component{
-  componentDidMount(){
-    this.props.getFollowers(this.props.theId);
-    this.props.getFollowing(this.props.theId);
-  }
-
-
-
   render(){
-    console.log('these are the props with ray');
-    console.log(this.props);
-    let followers = this.props.follow.followers;
+    let followers = this.props.followers;
+    let following = this.props.following;
+    console.log('below are the followers in the follow component');
+      console.log(followers);
+    console.log('below are the following in the follow component');
+    console.log(following);
     // console.log('these are the followers');
     // console.log(followers);
-    let following = this.props.follow.following;
+    // let following = this.props.follow.following;
     // console.log('here are the following');
     // console.log(following)
     return(
       <div>
-         <Collapsible trigger="See Follows" className="btn btn-secondary">
-          <div>
-            <h6>Followers</h6>
-            <ul className="list">
-            {followers.map(p => <div><li key={p._id}>{p.follower.name}</li>
-              </div>
-             )}
-            </ul>
-            <h6>Following</h6>
-            <ul className="list">
-              {following.map(p => <div><li key={p._id}>{p.following.name}</li>
-                </div>
-          )}
-            </ul>
-         </div>
-         </Collapsible>
+        <Collapsible trigger="See Follows" className="btn btn-secondary">
+         <div>
+           <h6>Followers</h6>
+           <ul className="list">
+           {this.props.followers.map(p => <div><li key={p._id}>{p.following.name}</li>
+             </div>
+            )}
+           </ul>
+           <h6>Following</h6>
+           <ul className="list">
+             {this.props.following.map(p => <div><li key={p._id}>{p.follower.name}</li>
+               </div>
+         )}
+           </ul>
+        </div>
+        </Collapsible>
       </div>
     )
   }
@@ -49,6 +45,7 @@ class Follow extends Component{
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  follow: state.follow
 })
-export default connect(mapStateToProps, {getFollowers, getFollowing})(Follow);
+export default connect(mapStateToProps)(Follow);
+
+//
