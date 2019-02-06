@@ -23,13 +23,13 @@ class Follow extends Component{
       <div>
         <Collapsible trigger="See Follows" className="btn btn-secondary">
          <div>
-           <h6>Followers</h6>
+           <h6>Following</h6>
            <ul className="list">
            {this.props.followers.map(p => <div><li key={p._id}>{p.following.name}</li>
              </div>
             )}
            </ul>
-           <h6>Following</h6>
+           <h6>Followers</h6>
            <ul className="list">
              {this.props.following.map(p => <div><li key={p._id}>{p.follower.name}</li>
                </div>

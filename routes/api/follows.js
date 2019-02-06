@@ -21,6 +21,8 @@ router.post('/:followingId/:followerId', (req, res) => {
         follower: req.params.followerId,
         following: req.params.followingId
       });
+      console.log('this is newFollow');
+      console.log(newFollow);
       newFollow.save()
      .then(follow => Follow.findOne({_id:follow._id}).populate('follower'))
      .then(follow => res.json(follow));
